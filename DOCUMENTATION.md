@@ -30,6 +30,7 @@ The "TechPath Finder" is an interactive web application that guides CSE freshers
     *   Recommended Certifications
     *   **New:** Key Projects/Applications
     *   **New:** Growth Trajectory
+    *   **New:** External Resources (curated links to learning platforms, communities, etc.)
 *   **Responsive Design**: The application is designed to be accessible and functional across various devices (mobile and desktop).
 
 ### 4. Core Logic and Concepts
@@ -45,7 +46,7 @@ The application's recommendation system is built upon a weighted scoring mechani
     *   The `questions` array has been expanded to include new topics like ethical/social impact, problem-solving approach, and future technology trends.
 
 *   **`src/data/specializations.ts`**: This file contains detailed information for each of the 10 CSE specializations.
-    *   `Specialization` Interface: Each specialization has a unique `id`, `name`, `description`, and arrays for `jobTitles`, `requirements`, `suitableFor`, `skills`, `tools`, `challenges`, `certifications`, along with `averageSalary` and `futureOutlook` strings. New fields `keyProjects` and `growthTrajectory` have been added to provide more comprehensive insights.
+    *   `Specialization` Interface: Each specialization has a unique `id`, `name`, `description`, and arrays for `jobTitles`, `requirements`, `suitableFor`, `skills`, `tools`, `challenges`, `certifications`, along with `averageSalary` and `futureOutlook` strings. New fields `keyProjects`, `growthTrajectory`, and `externalResources` have been added to provide more comprehensive insights.
 
 #### 4.2. Recommendation Algorithm (`src/app/api/recommendations/route.ts`)
 
@@ -88,7 +89,7 @@ The application's recommendation system is built upon a weighted scoring mechani
         *   `components/`: Reusable React components
             *   `ProgressBar.tsx`: Component for displaying quiz progress.
             *   `ResultCard.tsx`: Component for displaying a single recommendation result.
-            *   `SpecializationDetail.tsx`: Component for displaying detailed specialization information.
+            *   `SpecializationDetail.tsx`: Component for displaying detailed specialization information, now displaying the newly added `keyProjects`, `growthTrajectory`, and `externalResources` fields.
         *   `data/`: Data models and content
             *   `questions.ts`: Defines the quiz questions and their associated specialization weights (expanded).
             *   `specializations.ts`: Defines the detailed information for each specialization (enhanced with `keyProjects` and `growthTrajectory`).

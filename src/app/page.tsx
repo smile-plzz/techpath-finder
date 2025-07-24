@@ -34,6 +34,7 @@ export interface Specialization {
   certifications: string[];
   keyProjects: string[];
   growthTrajectory: string;
+  externalResources: { name: string; url: string; }[];
 }
 
 export default function Home() {
@@ -369,6 +370,19 @@ export default function Home() {
                             <ul className="list-disc pl-5 space-y-1 text-gray-200">
                               {spec?.certifications.map(cert => (
                                 <li key={cert}>{cert}</li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 md:col-span-2">
+                            <h3 className="font-semibold text-lg mb-2 text-gray-300">External Resources</h3>
+                            <ul className="list-disc pl-5 space-y-1 text-gray-200">
+                              {spec?.externalResources?.map(resource => (
+                                <li key={resource.url}>
+                                  <a href={resource.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                                    {resource.name}
+                                  </a>
+                                </li>
                               ))}
                             </ul>
                           </div>

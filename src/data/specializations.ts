@@ -13,6 +13,7 @@ export interface Specialization {
   certifications: string[];
   keyProjects: string[];
   growthTrajectory: string;
+  externalResources: { name: string; url: string; }[];
 }
 
 export const specializations: Specialization[] = [
@@ -86,7 +87,12 @@ export const specializations: Specialization[] = [
       "Creating AI-powered diagnostic tools in healthcare",
       "Designing autonomous navigation systems for self-driving cars"
     ],
-    growthTrajectory: "Entry-level roles often involve data preprocessing and model training. Mid-level engineers focus on model deployment and optimization. Senior roles lead research, architect complex AI systems, and specialize in areas like MLOps or AI ethics."
+    growthTrajectory: "Entry-level roles often involve data preprocessing and model training. Mid-level engineers focus on model deployment and optimization. Senior roles lead research, architect complex AI systems, and specialize in areas like MLOps or AI ethics.",
+    externalResources: [
+      { name: "Google AI Blog", url: "https://ai.googleblog.com/" },
+      { name: "Towards Data Science (Medium)", url: "https://towardsdatascience.com/" },
+      { name: "Coursera: Machine Learning by Andrew Ng", url: "https://www.coursera.org/learn/machine-learning" }
+    ]
   },
   {
     id: "robotics",
@@ -158,7 +164,12 @@ export const specializations: Specialization[] = [
       "Creating surgical robots for precision medicine",
       "Building humanoid robots for research and assistance"
     ],
-    growthTrajectory: "Starting as a robotics technician or junior engineer, one can advance to lead engineer, specializing in areas like control systems, computer vision, or human-robot interaction. Research and development roles are also common."
+    growthTrajectory: "Starting as a robotics technician or junior engineer, one can advance to lead engineer, specializing in areas like control systems, computer vision, or human-robot interaction. Research and development roles are also common.",
+    externalResources: [
+      { name: "ROS Documentation", url: "http://wiki.ros.org/" },
+      { name: "IEEE Robotics and Automation Society", url: "https://www.ieee-ras.org/" },
+      { name: "edX: Robotics MicroMasters Program", url: "https://www.edx.org/micromasters/pennx-robotics" }
+    ]
   },
   {
     id: "computer-forensics",
@@ -230,7 +241,12 @@ export const specializations: Specialization[] = [
       "Investigating mobile devices for evidence in criminal investigations",
       "Performing memory analysis to identify malware processes"
     ],
-    growthTrajectory: "Entry-level roles involve data collection and basic analysis. With experience, one can specialize in areas like mobile forensics, network forensics, or become an expert witness. Leadership roles in incident response teams are also common."
+    growthTrajectory: "Entry-level roles involve data collection and basic analysis. With experience, one can specialize in areas like mobile forensics, network forensics, or become an expert witness. Leadership roles in incident response teams are also common.",
+    externalResources: [
+      { name: "National Institute of Justice: Digital Forensics", url: "https://nij.ojp.gov/topics/articles/digital-forensics" },
+      { name: "SANS Institute", url: "https://www.sans.org/" },
+      { name: "Forensic Focus", url: "https://forensicfocus.com/" }
+    ]
   },
   {
     id: "cybersecurity",
@@ -303,7 +319,12 @@ export const specializations: Specialization[] = [
       "Responding to security incidents and breaches",
       "Designing secure network architectures"
     ],
-    growthTrajectory: "Starting as a security analyst, one can advance to roles like penetration tester, security engineer, or security architect. Leadership positions include CISO or security team lead. Specialization in areas like cloud security or IoT security is also common."
+    growthTrajectory: "Starting as a security analyst, one can advance to roles like penetration tester, security engineer, or security architect. Leadership positions include CISO or security team lead. Specialization in areas like cloud security or IoT security is also common.",
+    externalResources: [
+      { name: "OWASP Foundation", url: "https://owasp.org/" },
+      { name: "Hack The Box", url: "https://www.hackthebox.com/" },
+      { name: "Cybrary", url: "https://www.cybrary.it/" }
+    ]
   },
   {
     id: "game-design",
@@ -376,7 +397,12 @@ export const specializations: Specialization[] = [
       "Programming AI for non-player characters",
       "Optimizing game performance for various platforms"
     ],
-    growthTrajectory: "Entry-level roles include junior game designer or programmer. With experience, one can become a lead designer, technical director, or specialize in areas like AI, graphics, or multiplayer networking. Entrepreneurship in indie game development is also a path."
+    growthTrajectory: "Entry-level roles include junior game designer or programmer. With experience, one can become a lead designer, technical director, or specialize in areas like AI, graphics, or multiplayer networking. Entrepreneurship in indie game development is also a path.",
+    externalResources: [
+      { name: "Gamasutra", url: "https://www.gamasutra.com/" },
+      { name: "Unity Learn", url: "https://learn.unity.com/" },
+      { name: "Unreal Engine Documentation", url: "https://docs.unrealengine.com/" }
+    ]
   },
   {
     id: "cloud-computing",
@@ -450,7 +476,12 @@ export const specializations: Specialization[] = [
       "Automating cloud resource provisioning using Infrastructure as Code",
       "Optimizing cloud costs and performance for large enterprises"
     ],
-    growthTrajectory: "Starting as a cloud administrator or junior engineer, one can progress to cloud architect, DevOps engineer, or site reliability engineer. Specialization in specific cloud providers (AWS, Azure, GCP) or areas like FinOps is common."
+    growthTrajectory: "Starting as a cloud administrator or junior engineer, one can progress to cloud architect, DevOps engineer, or site reliability engineer. Specialization in specific cloud providers (AWS, Azure, GCP) or areas like FinOps is common.",
+    externalResources: [
+      { name: "AWS Documentation", url: "https://docs.aws.amazon.com/" },
+      { name: "Azure Documentation", url: "https://docs.microsoft.com/en-us/azure/" },
+      { name: "Google Cloud Documentation", url: "https://cloud.google.com/docs" }
+    ]
   },
   {
     id: "bioinformatics",
@@ -523,7 +554,12 @@ export const specializations: Specialization[] = [
       "Creating computational models for drug discovery",
       "Managing and querying large biological databases"
     ],
-    growthTrajectory: "Entry-level roles involve data analysis and pipeline execution. With experience, one can lead research projects, develop new bioinformatics tools, or specialize in areas like genomics, proteomics, or clinical bioinformatics."
+    growthTrajectory: "Entry-level roles involve data analysis and pipeline execution. With experience, one can lead research projects, develop new bioinformatics tools, or specialize in areas like genomics, proteomics, or clinical bioinformatics.",
+    externalResources: [
+      { name: "NCBI (National Center for Biotechnology Information)", url: "https://www.ncbi.nlm.nih.gov/" },
+      { name: "EMBL-EBI (European Bioinformatics Institute)", url: "https://www.ebi.ac.uk/" },
+      { name: "Bioinformatics.org", url: "https://www.bioinformatics.org/" }
+    ]
   },
   {
     id: "ux-design",
@@ -597,7 +633,12 @@ export const specializations: Specialization[] = [
       "Performing usability testing to identify design flaws",
       "Designing intuitive interfaces for mobile and web platforms"
     ],
-    growthTrajectory: "Starting as a junior UX designer, one can progress to lead UX designer, UX researcher, or product manager. Specialization in areas like accessibility, service design, or content strategy is also common."
+    growthTrajectory: "Starting as a junior UX designer, one can progress to lead UX designer, UX researcher, or product manager. Specialization in areas like accessibility, service design, or content strategy is also common.",
+    externalResources: [
+      { name: "Nielsen Norman Group", url: "https://www.nngroup.com/" },
+      { name: "Interaction Design Foundation", url: "https://www.interaction-design.org/" },
+      { name: "UX Collective (Medium)", url: "https://uxdesign.cc/" }
+    ]
   },
   {
     id: "big-data",
@@ -672,7 +713,12 @@ export const specializations: Specialization[] = [
       "Implementing machine learning models on large datasets",
       "Designing scalable data architectures for enterprise solutions"
     ],
-    growthTrajectory: "Entry-level roles include data analyst or junior data engineer. With experience, one can become a data scientist, big data architect, or lead data engineer. Specialization in areas like streaming data, data governance, or MLOps is also common."
+    growthTrajectory: "Entry-level roles include data analyst or junior data engineer. With experience, one can become a data scientist, big data architect, or lead data engineer. Specialization in areas like streaming data, data governance, or MLOps is also common.",
+    externalResources: [
+      { name: "Apache Hadoop", url: "https://hadoop.apache.org/" },
+      { name: "Databricks Blog", url: "https://databricks.com/blog" },
+      { name: "Towards Data Science (Big Data section)", url: "https://towardsdatascience.com/tagged/big-data" }
+    ]
   },
   {
     id: "iot",
@@ -745,6 +791,11 @@ export const specializations: Specialization[] = [
       "Designing connected health devices for remote patient monitoring",
       "Building smart city infrastructure for traffic management and environmental sensing"
     ],
-    growthTrajectory: "Starting as an embedded systems engineer or IoT developer, one can progress to IoT solutions architect, IoT product manager, or specialize in areas like IoT security or edge computing. Entrepreneurship in developing new IoT products is also a path."
+    growthTrajectory: "Starting as an embedded systems engineer or IoT developer, one can progress to IoT solutions architect, IoT product manager, or specialize in areas like IoT security or edge computing. Entrepreneurship in developing new IoT products is also a path.",
+    externalResources: [
+      { name: "IoT Agenda", url: "https://internetofthingsagenda.techtarget.com/" },
+      { name: "IoT World Today", url: "https://www.iotworldtoday.com/" },
+      { name: "Arduino Project Hub", url: "https://create.arduino.cc/projecthub" }
+    ]
   }
 ];
