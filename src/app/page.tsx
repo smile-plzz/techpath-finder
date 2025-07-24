@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Define interfaces for our data structures
 export interface Question {
@@ -31,6 +32,8 @@ export interface Specialization {
   challenges: string[];
   futureOutlook: string;
   certifications: string[];
+  keyProjects: string[];
+  growthTrajectory: string;
 }
 
 export default function Home() {
@@ -175,6 +178,33 @@ export default function Home() {
               <>
                 <h2 className="text-2xl font-semibold mb-6 text-white">Your Top Recommended Specializations</h2>
                 <div className="space-y-4">
+                  <div className="w-full h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart
+                        data={topSpecializations.map(result => ({
+                          name: specializations.find(s => s.id === result.id)?.name,
+                          score: result.score,
+                        }))}
+                        margin={{
+                          top: 20,
+                          right: 30,
+                          left: 20,
+                          bottom: 5,
+                        }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" stroke="#4a4a4a" />
+                        <XAxis dataKey="name" stroke="#ccc" />
+                        <YAxis stroke="#ccc" />
+                        <Tooltip
+                          contentStyle={{ backgroundColor: '#333', border: 'none', color: '#fff' }}
+                          itemStyle={{ color: '#fff' }}
+                          formatter={(value: number) => [`Score: ${value}`, '']}
+                        />
+                        <Legend />
+                        <Bar dataKey="score" fill="#8884d8" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
                   {topSpecializations.map((result, index) => {
                     const spec = specializations.find(s => s.id === result.id);
                     return (
@@ -318,6 +348,20 @@ export default function Home() {
                           <div className="bg-emerald-900 p-4 rounded-lg border border-emerald-700 md:col-span-2">
                             <h3 className="font-semibold text-lg mb-2 text-emerald-300">Future Outlook</h3>
                             <p className="text-gray-200">{spec?.futureOutlook}</p>
+                          </div>
+                          
+                          <div className="bg-blue-900 p-4 rounded-lg border border-blue-700 md:col-span-2">
+                            <h3 className="font-semibold text-lg mb-2 text-blue-300">Key Projects/Applications</h3>
+                            <ul className="list-disc pl-5 space-y-1 text-gray-200">
+                              {spec?.keyProjects?.map(project => (
+                                <li key={project}>{project}</li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="bg-purple-900 p-4 rounded-lg border border-purple-700 md:col-span-2">
+                            <h3 className="font-semibold text-lg mb-2 text-purple-300">Growth Trajectory</h3>
+                            <p className="text-gray-200">{spec?.growthTrajectory}</p>
                           </div>
                           
                           <div className="bg-amber-900 p-4 rounded-lg border border-amber-700 md:col-span-2">

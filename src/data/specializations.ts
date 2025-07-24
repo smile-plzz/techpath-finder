@@ -11,6 +11,8 @@ export interface Specialization {
   challenges: string[];
   futureOutlook: string;
   certifications: string[];
+  keyProjects: string[];
+  growthTrajectory: string;
 }
 
 export const specializations: Specialization[] = [
@@ -77,7 +79,14 @@ export const specializations: Specialization[] = [
       "Microsoft Certified: Azure AI Engineer",
       "TensorFlow Developer Certificate",
       "IBM AI Engineering Professional Certificate"
-    ]
+    ],
+    keyProjects: [
+      "Developing predictive models for financial markets",
+      "Building recommendation systems for e-commerce platforms",
+      "Creating AI-powered diagnostic tools in healthcare",
+      "Designing autonomous navigation systems for self-driving cars"
+    ],
+    growthTrajectory: "Entry-level roles often involve data preprocessing and model training. Mid-level engineers focus on model deployment and optimization. Senior roles lead research, architect complex AI systems, and specialize in areas like MLOps or AI ethics."
   },
   {
     id: "robotics",
@@ -142,7 +151,14 @@ export const specializations: Specialization[] = [
       "Universal Robots Certified Developer",
       "ABB Robotics Certification",
       "Certified LabVIEW Developer"
-    ]
+    ],
+    keyProjects: [
+      "Designing robotic arms for manufacturing automation",
+      "Developing autonomous drones for delivery or surveillance",
+      "Creating surgical robots for precision medicine",
+      "Building humanoid robots for research and assistance"
+    ],
+    growthTrajectory: "Starting as a robotics technician or junior engineer, one can advance to lead engineer, specializing in areas like control systems, computer vision, or human-robot interaction. Research and development roles are also common."
   },
   {
     id: "computer-forensics",
@@ -207,7 +223,14 @@ export const specializations: Specialization[] = [
       "GIAC Certified Forensic Analyst (GCFA)",
       "Certified Forensic Computer Examiner (CFCE)",
       "AccessData Certified Examiner (ACE)"
-    ]
+    ],
+    keyProjects: [
+      "Recovering deleted data from hard drives for legal cases",
+      "Analyzing network traffic to trace cyber attacks",
+      "Investigating mobile devices for evidence in criminal investigations",
+      "Performing memory analysis to identify malware processes"
+    ],
+    growthTrajectory: "Entry-level roles involve data collection and basic analysis. With experience, one can specialize in areas like mobile forensics, network forensics, or become an expert witness. Leadership roles in incident response teams are also common."
   },
   {
     id: "cybersecurity",
@@ -273,7 +296,14 @@ export const specializations: Specialization[] = [
       "Offensive Security Certified Professional (OSCP)",
       "CompTIA Security+",
       "GIAC Security Essentials (GSEC)"
-    ]
+    ],
+    keyProjects: [
+      "Conducting penetration tests on web applications and networks",
+      "Developing and implementing security policies and procedures",
+      "Responding to security incidents and breaches",
+      "Designing secure network architectures"
+    ],
+    growthTrajectory: "Starting as a security analyst, one can advance to roles like penetration tester, security engineer, or security architect. Leadership positions include CISO or security team lead. Specialization in areas like cloud security or IoT security is also common."
   },
   {
     id: "game-design",
@@ -339,7 +369,14 @@ export const specializations: Specialization[] = [
       "Autodesk Certified Professional",
       "Certified Game Developer",
       "Certified Scrum Master for Game Development"
-    ]
+    ],
+    keyProjects: [
+      "Developing game mechanics and core gameplay loops",
+      "Designing immersive game levels and environments",
+      "Programming AI for non-player characters",
+      "Optimizing game performance for various platforms"
+    ],
+    growthTrajectory: "Entry-level roles include junior game designer or programmer. With experience, one can become a lead designer, technical director, or specialize in areas like AI, graphics, or multiplayer networking. Entrepreneurship in indie game development is also a path."
   },
   {
     id: "cloud-computing",
@@ -406,7 +443,14 @@ export const specializations: Specialization[] = [
       "Google Cloud Professional Cloud Architect",
       "Certified Kubernetes Administrator (CKA)",
       "HashiCorp Certified: Terraform Associate"
-    ]
+    ],
+    keyProjects: [
+      "Migrating on-premise infrastructure to cloud platforms",
+      "Designing and implementing scalable cloud-native applications",
+      "Automating cloud resource provisioning using Infrastructure as Code",
+      "Optimizing cloud costs and performance for large enterprises"
+    ],
+    growthTrajectory: "Starting as a cloud administrator or junior engineer, one can progress to cloud architect, DevOps engineer, or site reliability engineer. Specialization in specific cloud providers (AWS, Azure, GCP) or areas like FinOps is common."
   },
   {
     id: "bioinformatics",
@@ -472,7 +516,14 @@ export const specializations: Specialization[] = [
       "Genomic Data Science Certification",
       "Clinical Bioinformatics Certification",
       "Next-Generation Sequencing Data Analysis Certification"
-    ]
+    ],
+    keyProjects: [
+      "Analyzing genomic data to identify disease markers",
+      "Developing algorithms for protein structure prediction",
+      "Creating computational models for drug discovery",
+      "Managing and querying large biological databases"
+    ],
+    growthTrajectory: "Entry-level roles involve data analysis and pipeline execution. With experience, one can lead research projects, develop new bioinformatics tools, or specialize in areas like genomics, proteomics, or clinical bioinformatics."
   },
   {
     id: "ux-design",
@@ -539,7 +590,14 @@ export const specializations: Specialization[] = [
       "Interaction Design Foundation Certification",
       "Google UX Design Professional Certificate",
       "Certified Usability Analyst (CUA)"
-    ]
+    ],
+    keyProjects: [
+      "Conducting user research to understand user needs and behaviors",
+      "Creating wireframes and prototypes for new applications",
+      "Performing usability testing to identify design flaws",
+      "Designing intuitive interfaces for mobile and web platforms"
+    ],
+    growthTrajectory: "Starting as a junior UX designer, one can progress to lead UX designer, UX researcher, or product manager. Specialization in areas like accessibility, service design, or content strategy is also common."
   },
   {
     id: "big-data",
@@ -607,7 +665,14 @@ export const specializations: Specialization[] = [
       "Google Cloud Professional Data Engineer",
       "Microsoft Certified: Azure Data Engineer",
       "Databricks Certified Data Engineer"
-    ]
+    ],
+    keyProjects: [
+      "Building data pipelines for real-time analytics",
+      "Developing data warehouses for business intelligence",
+      "Implementing machine learning models on large datasets",
+      "Designing scalable data architectures for enterprise solutions"
+    ],
+    growthTrajectory: "Entry-level roles include data analyst or junior data engineer. With experience, one can become a data scientist, big data architect, or lead data engineer. Specialization in areas like streaming data, data governance, or MLOps is also common."
   },
   {
     id: "iot",
@@ -673,6 +738,13 @@ export const specializations: Specialization[] = [
       "Certified Internet of Things Practitioner",
       "IoT Security Foundation Certification",
       "Cisco IoT Certification"
-    ]
+    ],
+    keyProjects: [
+      "Developing smart home devices and ecosystems",
+      "Implementing industrial IoT solutions for predictive maintenance",
+      "Designing connected health devices for remote patient monitoring",
+      "Building smart city infrastructure for traffic management and environmental sensing"
+    ],
+    growthTrajectory: "Starting as an embedded systems engineer or IoT developer, one can progress to IoT solutions architect, IoT product manager, or specialize in areas like IoT security or edge computing. Entrepreneurship in developing new IoT products is also a path."
   }
 ];

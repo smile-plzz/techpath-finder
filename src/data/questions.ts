@@ -529,5 +529,108 @@ export const questions: Question[] = [
         ]
       }
     ]
+  },
+  {
+    id: "ethical-social-impact",
+    text: "How important is it for your work to have a positive ethical or social impact?",
+    options: [
+      {
+        id: "very-important",
+        text: "Very important; I want to contribute to meaningful causes.",
+        specializations: [
+          { id: "bioinformatics", weight: 5 },
+          { id: "cybersecurity", weight: 4 },
+          { id: "ai-ml", weight: 3 } // AI ethics
+        ]
+      },
+      {
+        id: "somewhat-important",
+        text: "Somewhat important; it's a bonus but not a primary driver.",
+        specializations: [
+          { id: "ux-design", weight: 3 },
+          { id: "cloud-computing", weight: 2 }
+        ]
+      },
+      {
+        id: "not-important",
+        text: "Not a major factor; my focus is on technical challenges.",
+        specializations: [
+          { id: "game-design", weight: 3 },
+          { id: "robotics", weight: 2 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "problem-solving-approach",
+    text: "What's your preferred approach to problem-solving?",
+    options: [
+      {
+        id: "structured-logical",
+        text: "Structured and logical, breaking down complex problems systematically.",
+        specializations: [
+          { id: "big-data", weight: 5 },
+          { id: "computer-forensics", weight: 4 },
+          { id: "cloud-computing", weight: 4 }
+        ]
+      },
+      {
+        id: "creative-innovative",
+        text: "Creative and innovative, thinking outside the box for novel solutions.",
+        specializations: [
+          { id: "ai-ml", weight: 5 },
+          { id: "robotics", weight: 4 },
+          { id: "game-design", weight: 4 }
+        ]
+      },
+      {
+        id: "hands-on-experimental",
+        text: "Hands-on and experimental, learning by doing and iterating.",
+        specializations: [
+          { id: "iot", weight: 5 },
+          { id: "robotics", weight: 5 },
+          { id: "ux-design", weight: 3 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "future-trends-interest",
+    text: "Which emerging technology trends excite you the most?",
+    options: [
+      {
+        id: "quantum-computing",
+        text: "Quantum Computing and advanced algorithms.",
+        specializations: [
+          { id: "ai-ml", weight: 4 },
+          { id: "big-data", weight: 3 }
+        ]
+      },
+      {
+        id: "blockchain-web3",
+        text: "Blockchain, Web3, and decentralized applications.",
+        specializations: [
+          { id: "cybersecurity", weight: 3 },
+          { id: "cloud-computing", weight: 2 }
+        ]
+      },
+      {
+        id: "ar-vr-metaverse",
+        text: "Augmented Reality, Virtual Reality, and the Metaverse.",
+        specializations: [
+          { id: "game-design", weight: 5 },
+          { id: "ux-design", weight: 4 },
+          { id: "iot", weight: 3 }
+        ]
+      },
+      {
+        id: "biotechnology-genomics",
+        text: "Biotechnology, Genomics, and personalized medicine.",
+        specializations: [
+          { id: "bioinformatics", weight: 5 },
+          { id: "ai-ml", weight: 3 }
+        ]
+      }
+    ]
   }
 ];

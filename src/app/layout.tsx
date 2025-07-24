@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CSE Specialization Recommendation App',
+  title: 'TechPath Finder',
   description: 'An app to help CSE freshers choose their specialization',
 }
 
