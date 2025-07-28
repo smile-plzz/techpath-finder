@@ -9,12 +9,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalSteps }) =>
   const progress = (currentStep / totalSteps) * 100;
   
   return (
-    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+    <div className="w-full bg-gray-700 rounded-full h-3 mb-6 relative">
       <div 
-        className="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-in-out" 
+        className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500 ease-in-out"
         style={{ width: `${progress}%` }}
       ></div>
-      <p className="text-sm text-gray-600 mt-1">Question {currentStep} of {totalSteps}</p>
+      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+        <p className="text-xs font-semibold text-white">{Math.round(progress)}% Complete</p>
+      </div>
     </div>
   );
 };

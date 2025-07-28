@@ -1,27 +1,16 @@
-# TechPath Finder
+# Pathfinder Pro
 
-A web application to help Computer Science Engineering (CSE) freshers choose specialized sectors for their careers.
+A comprehensive web application designed to guide individuals in discovering their ideal tech career path through personalized recommendations and detailed insights into various specializations.
 
 ## Features
 
-- Interactive questionnaire about interests, skills, and preferences
-- Enhanced Recommendation Algorithm with visual results (bar chart)
-- Detailed information about 10 different CSE specializations, including key projects and growth trajectory
-- Responsive design that works on mobile and desktop
-- Expanded question set for more nuanced recommendations
-
-## Specializations Covered
-
-1. AI and Machine Learning
-2. Robotics
-3. Computer Forensics
-4. Cybersecurity and Ethical Hacking
-5. Video Game Design
-6. Cloud Computing
-7. Bioinformatics
-8. UX Design
-9. Big Data
-10. Internet of Things (IoT)
+- **Intuitive Landing Page**: A welcoming homepage offering clear paths to either take the career quiz or explore specializations directly.
+- **Interactive Career Quiz**: A streamlined questionnaire (limited to 10 questions) that assesses user interests, skills, and preferences. Features a visual progress bar for enhanced user experience.
+- **Enhanced Recommendation Algorithm**: Processes user answers to calculate and present a ranked list of suitable tech specializations, accompanied by a bar chart visualization for clearer comparison.
+- **Comprehensive Specialization Directory**: Allows users to browse and search through a detailed list of tech specializations.
+- **Detailed Specialization Information**: Provides comprehensive details for various tech specializations, including job titles, requirements, suitable candidate traits, average salary, key skills, tools & technologies, challenges, future outlook, recommended certifications, key projects/applications, growth trajectory, and external resources.
+- **Unified UI/UX Design**: A consistent and modern dark theme with unified typography, refined color palette, standardized interactive elements, and subtle animations for a polished user experience.
+- **Responsive Design**: The application is designed to be accessible and functional across various devices (mobile and desktop).
 
 ## Technology Stack
 
@@ -31,7 +20,7 @@ A web application to help Computer Science Engineering (CSE) freshers choose spe
 
 ## How It Works
 
-The application uses a weighted scoring algorithm to match users with suitable specializations based on their responses to questions about:
+The application uses a weighted scoring algorithm to match users with suitable specializations based on their responses to a concise set of 10 questions covering:
 
 - Interests
 - Skills
@@ -70,12 +59,18 @@ Each response adds weight to relevant specializations, and the top matches are p
 
 ## Project Structure
 
-- `src/app/page.tsx`: Main application component (quiz logic, display, and results visualization)
-- `src/app/layout.tsx`: Root layout component for the application
-- `src/components/`: Reusable UI components
+- `src/app/page.tsx`: The new landing page, offering navigation to the quiz or specialization directory.
+- `src/app/layout.tsx`: Root layout component for the application, now including the global `Navbar`.
+- `src/app/quiz/page.tsx`: The main quiz component page.
+- `src/app/specializations/page.tsx`: Page for listing all specializations with search functionality.
+- `src/app/specializations/[id]/page.tsx`: Dynamic page for displaying individual specialization details.
+- `src/components/Navbar.tsx`: Navigation bar component for consistent site-wide navigation.
+- `src/components/ProgressBar.tsx`: Component for visually representing quiz progress with enhanced styling.
+- `src/components/ResultCard.tsx`: Component for displaying a single recommendation result with improved visual appeal and hover effects.
+- `src/components/SpecializationDetail.tsx`: Component for displaying detailed specialization information, now with enhanced card designs and colorful hover effects for sections.
 - `src/data/`: Data models and content
-  - `specializations.ts`: Information about CSE specializations (now including key projects and growth trajectory)
-  - `questions.ts`: Question flow and scoring weights (now with expanded questions)
+  - `specializations.ts`: Information about CSE specializations.
+  - `questions.ts`: Question flow and scoring weights.
 - `src/app/api/`: Backend API routes
 
 ## API Endpoints
