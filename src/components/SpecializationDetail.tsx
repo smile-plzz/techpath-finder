@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Specialization } from '@/data/specializations';
+import { Specialization } from '../components/types'; // Updated import path
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { CareerPathStep, CareerJump, SpecializationCareerData } from '@/data/careerGrowth';
 
@@ -65,28 +65,28 @@ const SpecializationDetail: React.FC<SpecializationDetailProps> = ({ specializat
       
       {/* Tabs */}
       <div className="border-b border-gray-700 mb-6">
-        <nav className="flex space-x-4">
+        <nav className="flex space-x-4 overflow-x-auto pb-2">
           <button 
             onClick={() => setActiveTab('overview')}
-            className={`py-2 px-3 ${activeTab === 'overview' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
+            className={`flex-shrink-0 py-2 px-3 ${activeTab === 'overview' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
           >
             Overview
           </button>
           <button 
             onClick={() => setActiveTab('skills')}
-            className={`py-2 px-3 ${activeTab === 'skills' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
+            className={`flex-shrink-0 py-2 px-3 ${activeTab === 'skills' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
           >
             Skills & Tools
           </button>
           <button 
             onClick={() => setActiveTab('career')}
-            className={`py-2 px-3 ${activeTab === 'career' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
+            className={`flex-shrink-0 py-2 px-3 ${activeTab === 'career' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
           >
             Career
           </button>
           <button 
             onClick={() => setActiveTab('growth')}
-            className={`py-2 px-3 ${activeTab === 'growth' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
+            className={`flex-shrink-0 py-2 px-3 ${activeTab === 'growth' ? 'border-b-2 border-primary-blue text-primary-blue' : 'text-gray-400 hover:text-gray-300'}`}
           >
             Career Growth
           </button>
@@ -95,7 +95,7 @@ const SpecializationDetail: React.FC<SpecializationDetailProps> = ({ specializat
       
       {/* Tab Content */}
       {activeTab === 'overview' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in-up">
           <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 group hover:border-primary-blue transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary-blue to-secondary-purple opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
             <h3 className="font-semibold text-xl mb-3 text-primary-blue group-hover:text-white transition-colors duration-300">Common Job Titles</h3>
@@ -135,7 +135,7 @@ const SpecializationDetail: React.FC<SpecializationDetailProps> = ({ specializat
       )}
       
       {activeTab === 'skills' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in-up">
           <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 group hover:border-indigo-400 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-blue-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
             <h3 className="font-semibold text-xl mb-3 text-indigo-400 group-hover:text-white transition-colors duration-300">Key Skills</h3>
@@ -169,7 +169,7 @@ const SpecializationDetail: React.FC<SpecializationDetailProps> = ({ specializat
       )}
       
       {activeTab === 'career' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in-up">
           <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 md:col-span-2 group hover:border-emerald-400 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-lime-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
             <h3 className="font-semibold text-xl mb-3 text-emerald-400 group-hover:text-white transition-colors duration-300">Future Outlook</h3>
@@ -219,7 +219,7 @@ const SpecializationDetail: React.FC<SpecializationDetailProps> = ({ specializat
       )}
 
       {activeTab === 'growth' && (
-        <div className="space-y-8">
+        <div className="space-y-8 animate-fade-in-up">
           {loadingCareerData ? (
             <div className="text-center text-gray-400">Loading career growth data...</div>
           ) : careerDataError ? (

@@ -1,42 +1,10 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import ProgressBar from './ProgressBar'; // Import the ProgressBar component
-
-// Define interfaces for our data structures
-export interface Question {
-  id: string;
-  text: string;
-  options: Option[];
-}
-
-export interface Option {
-  id: string;
-  text: string;
-  specializations: {
-    id: string;
-    weight: number;
-  }[];
-}
-
-export interface Specialization {
-  id: string;
-  name: string;
-  description: string;
-  jobTitles: string[];
-  requirements: string[];
-  suitableFor: string[];
-  averageSalary: string;
-  skills: string[];
-  tools: string[];
-  challenges: string[];
-  futureOutlook: string;
-  certifications: string[];
-  keyProjects: string[];
-  growthTrajectory: string;
-  externalResources: { name: string; url: string; }[];
-}
+import ProgressBar from './ProgressBar';
+import ResultCard from './ResultCard';
+import { Question, Specialization } from './types';
 
 export default function QuizComponent() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -49,6 +17,7 @@ export default function QuizComponent() {
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const questionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -67,7 +36,6 @@ export default function QuizComponent() {
           specializationsRes.json(),
         ]);
 
-        // Limit questions to the first 10
         setQuestions(questionsData.questions.slice(0, 10));
         setSpecializations(specializationsData.specializations);
         setLoading(false);
@@ -79,6 +47,12 @@ export default function QuizComponent() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (questionRef.current) {
+      questionRef.current.focus();
+    }
+  }, [currentQuestionIndex]);
 
   const handleOptionSelect = (optionId: string) => {
     const newAnswers = [...answers, optionId];
@@ -158,7 +132,7 @@ export default function QuizComponent() {
 
         {!showResults ? (
           currentQuestion && (
-            <div className="bg-gray-800 rounded-xl shadow-2xl p-8 mb-10 border border-gray-700 w-full max-w-2xl">
+            <div ref={questionRef} tabIndex={-1} className="bg-gray-800 rounded-xl shadow-2xl p-8 mb-10 border border-gray-700 w-full max-w-2xl animate-fade-in-up">
               <ProgressBar currentStep={currentQuestionIndex + 1} totalSteps={questions.length} />
               <h2 className="text-2xl font-semibold mb-5 text-white">
                 Question {currentQuestionIndex + 1} of {questions.length}
@@ -179,7 +153,7 @@ export default function QuizComponent() {
             </div>
           )
         ) : (
-          <div className="bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700 w-full max-w-2xl">
+          <div className="bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700 w-full max-w-2xl animate-fade-in-up">
             {!selectedSpecialization ? (
               <>
                 <h2 className="text-2xl font-semibold mb-6 text-white">Your Top Recommended Specializations</h2>
@@ -211,24 +185,9 @@ export default function QuizComponent() {
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
-                  {topSpecializations.map((result, index) => {
+                  {topSpecializations.map((result) => {
                     const spec = specializations.find(s => s.id === result.id);
-                    return (
-                      <div key={result.id} className="border border-gray-600 rounded-lg p-4 bg-gray-800 hover:shadow-lg transition-shadow">
-                        <div className="flex justify-between items-center">
-                          <h3 className="text-xl font-medium text-white">
-                            {index + 1}. {spec?.name}
-                          </h3>
-                          <button
-                            onClick={() => viewSpecializationDetails(result.id)}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                          >
-                            View Details
-                          </button>
-                        </div>
-                        <p className="mt-2 text-gray-300">{spec?.description.substring(0, 120)}...</p>
-                      </div>
-                    );
+                    return spec ? <ResultCard key={result.id} specialization={spec} onViewDetails={viewSpecializationDetails} /> : null;
                   })}
                 </div>
                 <button
@@ -411,4 +370,3 @@ export default function QuizComponent() {
     </main>
   );
 }
-

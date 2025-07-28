@@ -1,15 +1,8 @@
 "use client";
 
-"use client";
-
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-
-interface Specialization {
-  id: string;
-  name: string;
-  description: string;
-}
+import SpecializationCard from '@/components/SpecializationCard';
+import { Specialization } from '@/components/types';
 
 export default function SpecializationsPage() {
   const [specializations, setSpecializations] = useState<Specialization[]>([]);
@@ -69,6 +62,7 @@ export default function SpecializationsPage() {
             className="w-full p-4 rounded-xl bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-primary-blue transition-colors duration-300 shadow-inner"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search specializations"
           />
         </div>
 
@@ -77,15 +71,12 @@ export default function SpecializationsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredSpecializations.map((spec) => (
-              <Link key={spec.id} href={`/specializations/${spec.id}`} className="block group">
-                <div className="bg-gray-800 rounded-xl shadow-xl p-7 border border-gray-700 group-hover:border-primary-blue transition-all duration-300 transform group-hover:-translate-y-1">
-                  <h2 className="text-2xl font-bold mb-3 text-white group-hover:text-primary-blue transition-colors duration-300">{spec.name}</h2>
-                  <p className="text-gray-300 text-base leading-relaxed">{spec.description.substring(0, 120)}...</p>
-                  <button className="mt-5 px-6 py-2 bg-primary-blue text-white rounded-full hover:bg-secondary-purple transition-colors duration-300 shadow-md text-sm font-semibold">
-                    View Details
-                  </button>
-                </div>
-              </Link>
+              <SpecializationCard 
+                key={spec.id} 
+                specialization={spec} 
+                linkPath={`/specializations/${spec.id}`} 
+                buttonText="View Details" 
+              />
             ))}
           </div>
         )}

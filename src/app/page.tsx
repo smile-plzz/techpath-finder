@@ -2,13 +2,8 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-
-interface Specialization {
-  id: string;
-  name: string;
-  description: string;
-  jobTitles: string[];
-}
+import SpecializationCard from '@/components/SpecializationCard';
+import { Specialization } from '@/components/types';
 
 export default function HomePage() {
   const [featuredSpecializations, setFeaturedSpecializations] = useState<Specialization[]>([]);
@@ -69,22 +64,12 @@ export default function HomePage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {featuredSpecializations.map((spec) => (
-                <Link key={spec.id} href={`/specializations/${spec.id}`} className="block group">
-                  <div className="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700 group-hover:border-primary-blue transition-all duration-300 transform group-hover:-translate-y-1">
-                    <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-primary-blue transition-colors duration-300">{spec.name}</h3>
-                    <p className="text-gray-300 text-base leading-relaxed mb-4">{spec.description.substring(0, 100)}...</p>
-                    <div className="flex flex-wrap gap-2">
-                      {spec.jobTitles.slice(0, 2).map((job, idx) => (
-                        <span key={idx} className="bg-gray-700 text-gray-200 text-xs px-3 py-1 rounded-full">
-                          {job}
-                        </span>
-                      ))}
-                    </div>
-                    <button className="mt-6 px-4 py-2 bg-primary-blue text-white rounded-md hover:bg-secondary-purple transition-colors duration-300 text-sm font-semibold">
-                      Learn More
-                    </button>
-                  </div>
-                </Link>
+                <SpecializationCard 
+                  key={spec.id} 
+                  specialization={spec} 
+                  linkPath={`/specializations/${spec.id}`} 
+                  buttonText="Learn More" 
+                />
               ))}
             </div>
           )}
@@ -99,15 +84,12 @@ export default function HomePage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {allSpecializations.map((spec) => (
-                <Link key={spec.id} href={`/specializations/${spec.id}#growth`} className="block group">
-                  <div className="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700 group-hover:border-secondary-purple transition-all duration-300 transform group-hover:-translate-y-1">
-                    <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-secondary-purple transition-colors duration-300">{spec.name}</h3>
-                    <p className="text-gray-300 text-base leading-relaxed">{spec.description.substring(0, 100)}...</p>
-                    <button className="mt-6 px-4 py-2 bg-secondary-purple text-white rounded-md hover:bg-primary-blue transition-colors duration-300 text-sm font-semibold">
-                      View Growth
-                    </button>
-                  </div>
-                </Link>
+                <SpecializationCard 
+                  key={spec.id} 
+                  specialization={spec} 
+                  linkPath={`/specializations/${spec.id}#growth`} 
+                  buttonText="View Growth" 
+                />
               ))}
             </div>
           )}
