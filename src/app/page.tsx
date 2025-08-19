@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import SpecializationCard from '@/components/SpecializationCard';
 import { Specialization } from '@/components/types';
+import { SkeletonSpecializationGrid } from '@/components/SkeletonLoader';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 export default function HomePage() {
   const [featuredSpecializations, setFeaturedSpecializations] = useState<Specialization[]>([]);
@@ -33,8 +35,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24 bg-gradient-to-br from-gray-900 to-black text-white">
-      <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex flex-col">
+    <ErrorBoundary>
+      <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24 bg-gradient-to-br from-gray-900 to-black text-white">
+        <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex flex-col">
         <h1 className="text-5xl md:text-7xl font-extrabold text-center mb-8 leading-tight animate-fade-in-down">
           Pathfinder Pro
         </h1>
@@ -58,9 +61,17 @@ export default function HomePage() {
         <section className="w-full max-w-5xl">
           <h2 className="text-4xl font-bold text-center mb-10 text-white animate-fade-in-up delay-200">Featured Specializations</h2>
           {loading ? (
-            <p className="text-center text-gray-400">Loading featured specializations...</p>
+            <SkeletonSpecializationGrid />
           ) : error ? (
-            <p className="text-center text-red-500">Error: {error}</p>
+            <div className="text-center">
+              <p className="text-red-500 mb-4">Error: {error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              >
+                Retry
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {featuredSpecializations.map((spec) => (
@@ -78,9 +89,17 @@ export default function HomePage() {
         <section className="w-full max-w-5xl mt-20">
           <h2 className="text-4xl font-bold text-center mb-10 text-white animate-fade-in-up delay-300">Explore Career Growth by Specialization</h2>
           {loading ? (
-            <p className="text-center text-gray-400">Loading specializations...</p>
+            <SkeletonSpecializationGrid />
           ) : error ? (
-            <p className="text-center text-red-500">Error: {error}</p>
+            <div className="text-center">
+              <p className="text-red-500 mb-4">Error: {error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              >
+                Retry
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {allSpecializations.map((spec) => (
@@ -95,6 +114,7 @@ export default function HomePage() {
           )}
         </section>
       </div>
-    </main>
+      </main>
+    </ErrorBoundary>
   );
 }

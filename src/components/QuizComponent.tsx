@@ -5,6 +5,10 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import ProgressBar from './ProgressBar';
 import ResultCard from './ResultCard';
 import { Question, Specialization } from './types';
+import { SkeletonQuiz } from './SkeletonLoader';
+import { useQuizProgress, useQuizHistory } from '@/hooks/useLocalStorage';
+import { ErrorBoundary } from './ErrorBoundary';
+import QuizResumeCard from './QuizResumeCard';
 
 export default function QuizComponent() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -18,6 +22,10 @@ export default function QuizComponent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const questionRef = useRef<HTMLDivElement>(null);
+  
+  // Local storage hooks
+  const { progress, saveProgress, clearProgress, hasProgress } = useQuizProgress();
+  const { addResult } = useQuizHistory();
 
   useEffect(() => {
     async function fetchData() {
@@ -38,6 +46,13 @@ export default function QuizComponent() {
 
         setQuestions(questionsData.questions.slice(0, 10));
         setSpecializations(specializationsData.specializations);
+        
+        // Restore progress if available
+        if (hasProgress() && progress) {
+          setCurrentQuestionIndex(progress.currentQuestionIndex);
+          setAnswers(progress.answers);
+        }
+        
         setLoading(false);
       } catch (err) {
         setError((err as Error).message);
@@ -46,7 +61,7 @@ export default function QuizComponent() {
     }
 
     fetchData();
-  }, []);
+  }, [hasProgress, progress]);
 
   useEffect(() => {
     if (questionRef.current) {
@@ -57,6 +72,9 @@ export default function QuizComponent() {
   const handleOptionSelect = (optionId: string) => {
     const newAnswers = [...answers, optionId];
     setAnswers(newAnswers);
+    
+    // Save progress to local storage
+    saveProgress(currentQuestionIndex + 1, newAnswers);
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -89,6 +107,18 @@ export default function QuizComponent() {
 
     setResults(resultsArray);
     setShowResults(true);
+    
+    // Save result to history
+    if (resultsArray.length > 0) {
+      addResult({
+        id: resultsArray[0].id,
+        score: resultsArray[0].score,
+        answers: selectedOptions
+      });
+    }
+    
+    // Clear progress after completion
+    clearProgress();
   };
 
   const resetQuiz = () => {
@@ -97,6 +127,7 @@ export default function QuizComponent() {
     setResults([]);
     setShowResults(false);
     setSelectedSpecialization('');
+    clearProgress();
   };
 
   const viewSpecializationDetails = (id: string) => {
@@ -107,7 +138,12 @@ export default function QuizComponent() {
   if (loading) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24">
-        <div className="text-2xl font-semibold">Loading...</div>
+        <div className="z-10 max-w-5xl w-full flex flex-col items-center justify-center font-mono text-sm">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-10 text-white">
+            Tech Career Pathfinder
+          </h1>
+          <SkeletonQuiz />
+        </div>
       </main>
     );
   }
@@ -115,7 +151,26 @@ export default function QuizComponent() {
   if (error) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24">
-        <div className="text-2xl font-semibold text-red-500">Error: {error}</div>
+        <div className="z-10 max-w-5xl w-full flex flex-col items-center justify-center font-mono text-sm">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-10 text-white">
+            Tech Career Pathfinder
+          </h1>
+          <div className="bg-gray-800 rounded-xl shadow-2xl p-8 border border-red-500 w-full max-w-2xl text-center">
+            <div className="text-red-400 mb-4">
+              <svg className="w-16 h-16 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <h2 className="text-xl font-bold text-white mb-4">Failed to load quiz</h2>
+            <p className="text-gray-300 mb-6">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
       </main>
     );
   }
@@ -124,33 +179,44 @@ export default function QuizComponent() {
   const topSpecializations = results.slice(0, 3);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24">
-      <div className="z-10 max-w-5xl w-full flex flex-col items-center justify-center font-mono text-sm">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-10 text-white">
-          Tech Career Pathfinder
-        </h1>
+    <ErrorBoundary>
+      <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24">
+        <div className="z-10 max-w-5xl w-full flex flex-col items-center justify-center font-mono text-sm">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-10 text-white">
+            Tech Career Pathfinder
+          </h1>
 
-        {!showResults ? (
+                {!showResults ? (
           currentQuestion && (
-            <div ref={questionRef} tabIndex={-1} className="bg-gray-800 rounded-xl shadow-2xl p-8 mb-10 border border-gray-700 w-full max-w-2xl animate-fade-in-up">
-              <ProgressBar currentStep={currentQuestionIndex + 1} totalSteps={questions.length} />
-              <h2 className="text-2xl font-semibold mb-5 text-white">
-                Question {currentQuestionIndex + 1} of {questions.length}
-              </h2>
-              <p className="text-lg mb-8 text-gray-300">{currentQuestion.text}</p>
-              
-              <div className="space-y-4">
-                {currentQuestion.options.map((option) => (
-                  <button
-                    key={option.id}
-                    onClick={() => handleOptionSelect(option.id)}
-                    className="w-full text-left p-5 border border-gray-600 rounded-lg bg-gray-700 text-white hover:bg-primary-blue hover:border-primary-blue transition-all duration-300 transform hover:-translate-y-1 shadow-md"
-                  >
-                    {option.text}
-                  </button>
-                ))}
+            <>
+              {hasProgress() && progress && (
+                <QuizResumeCard
+                  progress={progress}
+                  totalQuestions={questions.length}
+                  onResume={() => {}} // Already resumed in useEffect
+                  onStartFresh={clearProgress}
+                />
+              )}
+              <div ref={questionRef} tabIndex={-1} className="bg-gray-800 rounded-xl shadow-2xl p-8 mb-10 border border-gray-700 w-full max-w-2xl animate-fade-in-up">
+                <ProgressBar currentStep={currentQuestionIndex + 1} totalSteps={questions.length} />
+                <h2 className="text-2xl font-semibold mb-5 text-white">
+                  Question {currentQuestionIndex + 1} of {questions.length}
+                </h2>
+                <p className="text-lg mb-8 text-gray-300">{currentQuestion.text}</p>
+                
+                <div className="space-y-4">
+                  {currentQuestion.options.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => handleOptionSelect(option.id)}
+                      className="w-full text-left p-5 border border-gray-600 rounded-lg bg-gray-700 text-white hover:bg-primary-blue hover:border-primary-blue transition-all duration-300 transform hover:-translate-y-1 shadow-md"
+                    >
+                      {option.text}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            </>
           )
         ) : (
           <div className="bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700 w-full max-w-2xl animate-fade-in-up">
@@ -368,5 +434,6 @@ export default function QuizComponent() {
         )}
       </div>
     </main>
+    </ErrorBoundary>
   );
 }
